@@ -5,66 +5,165 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Accordion - Default functionality</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
   <script>
   $( function() {
     $( "#accordion" ).accordion();
   } );
+
+  
+
+  $( function() {
+    $( ".add-attr" ).click(function(){
+    	$id = $(this).attr('group');
+    	$height = parseInt($(".ui-accordion-content-active").css('height')) + 30;
+    	$(".ui-accordion-content-active").css('height', $height + 'px')
+    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / ></div></div>");
+    });
+
+
+
+    $(".add-element").click(function(){
+    		$id = $(".attr-group").length + 1;
+    		$("div#accordion").append("<h3 class='element"+$id+"'>Element "+$id+"</h3><div class='element-for-delete-"+$id+"'><div class='container'><div class='elements-group-"+$id+" attr-group'>	<div class='row'><div class='col-sm'><input type = 'text' value='name' /></div><div class='col-sm'></div><div class='col-sm'><input type = 'text'  value='value' / ></div></div><div class='row'><div class='col-sm'><input type = 'text' value='label' /></div><div class='col-sm'>		     </div><div class='col-sm'><input type = 'text' value='value' /></div>  </div></div>	<div class='row'><div class='col-sm'></div><div class='col-sm'><button type='button' class='btn btn-secondary btn-lg add-attr-"+$id+"' group = '"+$id+"' >ADD Attribure</button></div><div class='col-sm'></div></div></div></div>");
+    		 $( ".add-attr-"+$id ).click(function(){
+			    	$id = $(this).attr('group');
+			    	$height = parseInt($(".ui-accordion-content-active").css('height')) + 30;
+			    	$(".ui-accordion-content-active").css('height', $height + 'px')
+			    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / ></div></div>");
+			    });
+
+
+    });
+
+
+	$(".add-element").click(function(){
+	    $( "#accordion" ).accordion( "refresh" );
+	 });
+
+	$(".delete-last-element").click(function(){
+		$id = $(".attr-group").length;
+		$(".element"+$id).remove();
+		$(".element-for-delete-"+$id).remove();
+
+	});
+
+  } );
+
+
+
+
+
   </script>
+
+<style>
+	h1 {
+		font-family: Arial;
+	}
+	label.ui-widget{
+		display: table;
+	}
+	.container .row{
+		margin: 20px;
+	}
+	.delete-attr{
+		color: #ff0000;
+		cursor: pointer;
+	}
+</style>
+
 </head>
 <body>
+
  
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+     
+    </div>
+    <div class="col-sm">
+      <h3>Visual JSON Builder</h3>
+ 
+    </div>
+    <div class="col-sm">
+      
+    </div>
+  </div>
+</div> 
 <div id="accordion">
-  <h3>Section 1</h3>
+  
+
+
+  <h3 class="element-one">Element 1</h3>
   <div>
-    <p>
-    Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer
-    ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit
-    amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut
-    odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.
-    </p>
+
+		 
+		<div class="container">
+
+		<div class="elements-group-1 attr-group">	
+		  <div class="row">
+		    <div class="col-sm">
+		      <input type = "text" value="name" />
+		    </div>
+		    <div class="col-sm">
+		     
+		    </div>
+		    <div class="col-sm">
+		      <input type = "text"  value="value" / >
+		    </div>
+		  </div>
+
+		   <div class="row">
+		    <div class="col-sm">
+		      <input type = "text" value="label" />
+		    </div>
+		    <div class="col-sm">
+		     
+		    </div>
+		    <div class="col-sm">
+		      <input type = "text" value="value" />
+		    </div>
+		  </div>
+
+
+ 		</div>	
+ 			<div class="row">
+		    <div class="col-sm">
+		     
+		    </div>
+		    <div class="col-sm">
+		     <button type="button" class="btn btn-secondary btn-lg add-attr" group = "1" >ADD Attribure</button>
+		    </div>
+		    <div class="col-sm">
+		      
+		    </div>
+		  </div>
+		</div> 
+
+  
   </div>
-  <h3>Section 2</h3>
-  <div>
-    <p>
-    Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet
-    purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor
-    velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In
-    suscipit faucibus urna.
-    </p>
-  </div>
-  <h3>Section 3</h3>
-  <div>
-    <p>
-    Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis.
-    Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero
-    ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis
-    lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui.
-    </p>
-    <ul>
-      <li>List item one</li>
-      <li>List item two</li>
-      <li>List item three</li>
-    </ul>
-  </div>
-  <h3>Section 4</h3>
-  <div>
-    <p>
-    Cras dictum. Pellentesque habitant morbi tristique senectus et netus
-    et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in
-    faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia
-    mauris vel est.
-    </p>
-    <p>
-    Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus.
-    Class aptent taciti sociosqu ad litora torquent per conubia nostra, per
-    inceptos himenaeos.
-    </p>
-  </div>
-</div>
  
+</div>
+
+
+
+ 
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <button type="button" class="btn btn-primary btn-lg add-element">ADD Element</button>
+    </div>
+    <div class="col-sm">
+     <button type="button" class="btn btn-danger delete-last-element">Delete Last Element</button>
+    </div>
+    <div class="col-sm">
+      <button type="button" class="btn btn-secondary btn-lg">View JSON</button>
+    </div>
+  </div>
+</div> 
  
 </body>
 </html>
