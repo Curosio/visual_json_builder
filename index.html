@@ -14,14 +14,21 @@
     $( "#accordion" ).accordion();
   } );
 
-  
+  function add_to_array(th){	
+   			th.parent().append("<input type = 'text' value= 'new value' / >"); 
+   			
+	}
+
+
+
+
 
   $( function() {
     $( ".add-attr" ).click(function(){
     	$id = $(this).attr('group');
-    	$height = parseInt($(".ui-accordion-content-active").css('height')) + 30;
-    	$(".ui-accordion-content-active").css('height', $height + 'px')
-    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / ></div></div>");
+    	
+    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
+    	 $( "#accordion" ).accordion( "refresh" );
     });
 
 
@@ -31,9 +38,9 @@
     		$("div#accordion").append("<h3 class='element"+$id+"'>Element "+$id+"</h3><div class='element-for-delete-"+$id+"'><div class='container'><div class='elements-group-"+$id+" attr-group'>	<div class='row'><div class='col-sm'><input type = 'text' value='name' /></div><div class='col-sm'></div><div class='col-sm'><input type = 'text'  value='value' / ></div></div><div class='row'><div class='col-sm'><input type = 'text' value='label' /></div><div class='col-sm'>		     </div><div class='col-sm'><input type = 'text' value='value' /></div>  </div></div>	<div class='row'><div class='col-sm'></div><div class='col-sm'><button type='button' class='btn btn-secondary btn-lg add-attr-"+$id+"' group = '"+$id+"' >ADD Attribure</button></div><div class='col-sm'></div></div></div></div>");
     		 $( ".add-attr-"+$id ).click(function(){
 			    	$id = $(this).attr('group');
-			    	$height = parseInt($(".ui-accordion-content-active").css('height')) + 30;
-			    	$(".ui-accordion-content-active").css('height', $height + 'px')
-			    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / ></div></div>");
+			    	
+			    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
+			    	 $( "#accordion" ).accordion( "refresh" );
 			    });
 
 
@@ -50,6 +57,7 @@
 		$(".element-for-delete-"+$id).remove();
 
 	});
+
 
   } );
 
@@ -70,7 +78,11 @@
 		margin: 20px;
 	}
 	.delete-attr{
-		color: #ff0000;
+		color: #aa0000;
+		cursor: pointer;
+	}
+	.add-to-array{
+		color: #00aa00;
 		cursor: pointer;
 	}
 </style>
@@ -160,7 +172,7 @@
      <button type="button" class="btn btn-danger delete-last-element">Delete Last Element</button>
     </div>
     <div class="col-sm">
-      <button type="button" class="btn btn-secondary btn-lg">View JSON</button>
+      <button type="button" class="btn btn-secondary btn-lg view-json">View JSON</button>
     </div>
   </div>
 </div> 
