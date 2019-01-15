@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Accordion - Default functionality</title>
+  <title>Visual JSON Builder</title>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,7 +15,7 @@
   } );
 
   function add_to_array(th){	
-   			th.parent().append("<input type = 'text' value= 'new value' / >"); 
+   			th.parent().append("<input type = 'text' value= 'new value' class='value-json' / >"); 
    			
 	}
 
@@ -24,10 +24,46 @@
 
 
   $( function() {
+
+
+  	$(".view-json").click(function(){
+  		$inputes = $(".name-json");
+  		$json_answer = Array();
+  		$inputes.each(function(i){
+
+  			$name = $(this).val();
+  			
+  			isarr = $(this).parent().parent().find(".value-json").length;
+  			if(isarr > 1){
+  				$value = Array();
+  			}
+  			$line_answer = Array ();
+  			$(this).parent().parent().find(".value-json").each(function(i){
+  				if(isarr > 1){
+  					$value.push($(this).val());
+  				}else{
+  					$value = $(this).val();
+  				}
+  				
+  				
+  			});
+  			
+  			$line_answer.push($name);
+  			$line_answer.push($value);
+  			$json_answer.push($line_answer);
+
+  			
+  		});
+  		console.log($json_answer);
+  		alert(JSON.stringify($json_answer));
+  	});
+
+
+
     $( ".add-attr" ).click(function(){
     	$id = $(this).attr('group');
     	
-    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
+    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' class='name-json'/></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm values-json'><input type = 'text' value= 'new value' class='value-json'/ > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
     	 $( "#accordion" ).accordion( "refresh" );
     });
 
@@ -35,11 +71,11 @@
 
     $(".add-element").click(function(){
     		$id = $(".attr-group").length + 1;
-    		$("div#accordion").append("<h3 class='element"+$id+"'>Element "+$id+"</h3><div class='element-for-delete-"+$id+"'><div class='container'><div class='elements-group-"+$id+" attr-group'>	<div class='row'><div class='col-sm'><input type = 'text' value='name' /></div><div class='col-sm'></div><div class='col-sm'><input type = 'text'  value='value' / ></div></div><div class='row'><div class='col-sm'><input type = 'text' value='label' /></div><div class='col-sm'>		     </div><div class='col-sm'><input type = 'text' value='value' /></div>  </div></div>	<div class='row'><div class='col-sm'></div><div class='col-sm'><button type='button' class='btn btn-secondary btn-lg add-attr-"+$id+"' group = '"+$id+"' >ADD Attribure</button></div><div class='col-sm'></div></div></div></div>");
+    		$("div#accordion").append("<h3 class='element"+$id+"'>Element "+$id+"</h3><div class='element-for-delete-"+$id+"'><div class='container'><div class='elements-group-"+$id+" attr-group'>	<div class='row'><div class='col-sm'><input type = 'text' value='name'class='name-json' /></div><div class='col-sm'></div><div class='col-sm'><input type = 'text'  value='value' class='value-json'/ ></div></div><div class='row'><div class='col-sm'><input type = 'text' value='label' class='name-json'/></div><div class='col-sm'>		     </div><div class='col-sm'><input type = 'text' value='value' class='value-json'/></div>  </div></div>	<div class='row'><div class='col-sm'></div><div class='col-sm'><button type='button' class='btn btn-secondary btn-lg add-attr-"+$id+"' group = '"+$id+"' >ADD Attribure</button></div><div class='col-sm'></div></div></div></div>");
     		 $( ".add-attr-"+$id ).click(function(){
 			    	$id = $(this).attr('group');
 			    	
-			    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' /></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm'><input type = 'text' value= 'new value' / > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
+			    	$(".elements-group-"+$id).append("<div class='row'><div class='col-sm'><input type = 'text' value='new attr' class='name-json'/></div><div class='col-sm'><span class = 'delete-attr' onclick=\"$(this).parent().parent().remove();\">Delete attribute</span></div><div class='col-sm values-json'><input type = 'text' value= 'new value' class='value-json'/ > <span class='add-to-array' onclick=' add_to_array($(this));' > Add To Array </span></div></div>");
 			    	 $( "#accordion" ).accordion( "refresh" );
 			    });
 
@@ -118,25 +154,25 @@
 		<div class="elements-group-1 attr-group">	
 		  <div class="row">
 		    <div class="col-sm">
-		      <input type = "text" value="name" />
+		      <input type = "text" value="name" class="name-json" />
 		    </div>
 		    <div class="col-sm">
 		     
 		    </div>
 		    <div class="col-sm">
-		      <input type = "text"  value="value" / >
+		      <input type = "text"  value="value" class="value-json" / >
 		    </div>
 		  </div>
 
 		   <div class="row">
 		    <div class="col-sm">
-		      <input type = "text" value="label" />
+		      <input type = "text" value="label" class="name-json" />
 		    </div>
 		    <div class="col-sm">
 		     
 		    </div>
 		    <div class="col-sm">
-		      <input type = "text" value="value" />
+		      <input type = "text" value="value"  class="value-json" />
 		    </div>
 		  </div>
 
