@@ -27,35 +27,51 @@
 
 
   	$(".view-json").click(function(){
-  		$inputes = $(".name-json");
-  		$json_answer = Array();
-  		$inputes.each(function(i){
 
-  			$name = $(this).val();
-  			
-  			isarr = $(this).parent().parent().find(".value-json").length;
-  			if(isarr > 1){
-  				$value = Array();
-  			}
-  			$line_answer = Array ();
-  			$(this).parent().parent().find(".value-json").each(function(i){
-  				if(isarr > 1){
-  					$value.push($(this).val());
-  				}else{
-  					$value = $(this).val();
-  				}
-  				
-  				
-  			});
-  			var $line_answer = {};
-        $line_answer[$name] = $value;
-        $
-  			//$line_answer.push (new {$name : $value});
-  		//	$line_answer.push($value);
-  			$json_answer.push($line_answer);
 
-  			
-  		});
+      $json_answer = Array();
+
+      $(".attr-group").each(function(i){
+
+      
+                  var $line_answer = {};
+
+                  $inputes = $(this).find(".name-json");
+                  
+                  $inputes.each(function(i){
+
+                    $name = $(this).val();
+                    console.log($name);
+                    isarr = $(this).parent().parent().find(".value-json").length;
+                    if(isarr > 1){
+                      $value = Array();
+                    }
+                    
+                    $(this).parent().parent().find(".value-json").each(function(i){
+                      if(isarr > 1){
+                        $value.push($(this).val());
+                      }else{
+                        $value = $(this).val();
+                      }
+                      
+                      
+                    });
+                   
+                    $line_answer[$name] = $value;
+                   
+                    //$line_answer.push (new {$name : $value});
+                  //  $line_answer.push($value);
+                    
+
+                    
+                  });
+
+
+                $json_answer.push($line_answer);
+
+
+      });
+
   		console.log($json_answer);
   		alert(JSON.stringify($json_answer));
   	});
